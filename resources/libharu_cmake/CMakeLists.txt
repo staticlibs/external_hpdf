@@ -32,6 +32,8 @@ target_include_directories ( ${PROJECT_NAME} BEFORE PRIVATE
         ${${PROJECT_NAME}_SOURCE_DIR}/include
         ${${PROJECT_NAME}_DEPS_PC_INCLUDE_DIRS} )
 if ( ${CMAKE_CXX_COMPILER_ID}x MATCHES "MSVCx" )
+    target_compile_options ( ${PROJECT_NAME} PRIVATE
+            /wd4244 /wd4305 /wd4267 /wd4018 )
     target_compile_definitions ( ${PROJECT_NAME} PRIVATE 
             -D_CRT_SECURE_NO_WARNINGS
             -D_CRT_SECURE_NO_DEPRECATE )
