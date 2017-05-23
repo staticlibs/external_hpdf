@@ -16,8 +16,8 @@ cmake_minimum_required ( VERSION 2.8.12 )
 
 # project
 project ( external_hpdf CXX C )
-set ( ${PROJECT_NAME}_STATICLIB_VERSION 1.5.13-1 )
-set ( ${PROJECT_NAME}_DESCRIPTION "libharu library build for Staticlibs" )
+set ( ${PROJECT_NAME}_STATICLIB_VERSION 2.3.0-1 )
+set ( ${PROJECT_NAME}_DESCRIPTION "libharu PDF library build for Staticlibs" )
 set ( ${PROJECT_NAME}_URL https://github.com/staticlibs/external_hpdf )
 include ( ${CMAKE_CURRENT_LIST_DIR}/resources/macros.cmake )
 

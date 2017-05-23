@@ -32,15 +32,17 @@ void test_write() {
         std::cout << "hpdf error: no: [" << std::hex << error_no << "], detail: [" << detail_no << "]" << std::endl;
     }, nullptr);
     slassert(pdf);
+    HPDF_UseUTFEncodings(pdf);
     HPDF_SetCompressionMode(pdf, HPDF_COMP_ALL);
     HPDF_SetPageMode(pdf, HPDF_PAGE_MODE_USE_OUTLINE);
     HPDF_Page page = HPDF_AddPage(pdf);
 
-    HPDF_Font font = HPDF_GetFont(pdf, "Helvetica", nullptr);
+    auto font_name = HPDF_LoadTTFontFromFile(pdf, "../test/DejaVuSans.ttf", HPDF_TRUE);
+    HPDF_Font font = HPDF_GetFont(pdf, font_name, "UTF-8");
     HPDF_Page_SetFontAndSize(page, font, 42);
     
     HPDF_Page_BeginText(page);
-    HPDF_Page_TextOut(page, 50, 50, "hello pdf!");
+    HPDF_Page_TextOut(page, 50, 50, "\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82 pdf!");
     HPDF_Page_EndText(page);
     
     HPDF_Page_SetSize(page, HPDF_PAGE_SIZE_B5, HPDF_PAGE_LANDSCAPE);
