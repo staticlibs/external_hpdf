@@ -65,6 +65,7 @@ before_script:
     git clone --recursive https://github.com/staticlibs/external_libpng.git ;
     fi
   - git clone https://github.com/staticlibs/cmake.git
+  - git clone https://github.com/staticlibs/staticlib_config.git
 
 script:
   - set -e
