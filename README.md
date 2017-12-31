@@ -1,6 +1,9 @@
 libHaru PDF library build for Staticlibs
 ========================================
 
+[![travis](https://travis-ci.org/staticlibs/external_hpdf.svg?branch=master)](https://travis-ci.org/staticlibs/external_hpdf)
+[![appveyor](https://ci.appveyor.com/api/projects/status/github/staticlibs/external_hpdf?svg=true)](https://ci.appveyor.com/project/staticlibs/external-hpdf)
+
 This project is a part of [Staticlibs](http://staticlibs.net/).
 
 This project contains a CMake build file for building the [libharu](http://libharu.org/)
@@ -15,6 +18,10 @@ How to build
 ------------
 
 [CMake](http://cmake.org/) is required for building.
+
+[pkg-config](http://www.freedesktop.org/wiki/Software/pkg-config/) utility is used for dependency management.
+For Windows users ready-to-use binary version of `pkg-config` can be obtained from [tools_windows_pkgconfig](https://github.com/staticlibs/tools_windows_pkgconfig) repository.
+See [StaticlibsPkgConfig](https://github.com/staticlibs/wiki/wiki/StaticlibsPkgConfig) for Staticlibs-specific details about `pkg-config` usage.
 
 To build the library on Windows using Visual Studio 2013 Express run the following commands using
 Visual Studio development command prompt 
@@ -42,6 +49,10 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2017-12-31**
+ * version 2.3.0-2
+ * vs2017 support
 
 **2017-05-23**
 
