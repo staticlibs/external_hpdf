@@ -55,15 +55,18 @@ install:
         zlib-devel
         libpng-devel ;
 
+    `# Android` ;
+    git clone https://github.com/staticlibs/android-ndk-r9d-arm-linux-androideabi-4.8.git ../android-ndk ;
+
     fi
 
 before_script:
   - git submodule update --init --recursive
   - cd ..
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    git clone --recursive https://github.com/staticlibs/external_zlib.git ;
-    git clone --recursive https://github.com/staticlibs/external_libpng.git ;
-    fi
+# mac and android
+  - git clone --recursive https://github.com/staticlibs/external_zlib.git
+  - git clone --recursive https://github.com/staticlibs/external_libpng.git
+# all platforms
   - git clone https://github.com/staticlibs/cmake.git
   - git clone https://github.com/staticlibs/staticlib_config.git
 
@@ -100,14 +103,21 @@ script:
     pushd build ;
     cmake ../external_hpdf/test -DCMAKE_BUILD_TYPE=Release ;
     make all test ;
+    popd ;
 
     `# Fedora` ;
     $D cat /etc/fedora-release ;
     $D cmake /src/external_hpdf ;
     $D make ;
-    $D rm -rf * ;
+    $D sh -c "rm -rf /root && mkdir /root" ;
     $D cmake /src/external_hpdf/test -DCMAKE_BUILD_TYPE=Release ;
     $D make all test ;
+
+    `# Android` ;
+    mkdir build-android ;
+    pushd build-android ;
+    cmake ../external_hpdf/test -DCMAKE_BUILD_TYPE=Release -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DANDROID_TOOLCHAIN_DIR=`pwd`/../android-ndk ;
+    make ;
 
     fi
 
