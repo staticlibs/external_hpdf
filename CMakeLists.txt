@@ -16,7 +16,7 @@ cmake_minimum_required ( VERSION 2.8.12 )
 
 # project
 project ( external_hpdf CXX C )
-set ( ${PROJECT_NAME}_STATICLIB_VERSION 2.3.0-2 )
+set ( ${PROJECT_NAME}_STATICLIB_VERSION 2.3.0-3 )
 set ( ${PROJECT_NAME}_DESCRIPTION "libharu PDF library build for Staticlibs" )
 set ( ${PROJECT_NAME}_URL https://github.com/staticlibs/external_hpdf )
 include ( ${CMAKE_CURRENT_LIST_DIR}/resources/macros.cmake )
@@ -40,7 +40,7 @@ add_custom_target ( ${PROJECT_NAME} DEPENDS hpdf )
 # pkg-config
 set ( ${PROJECT_NAME}_MODULE hpdf )
 set ( ${PROJECT_NAME}_PC_REQUIRES "zlib libpng" )
-set ( ${PROJECT_NAME}_PC_CFLAGS "-I${CMAKE_CURRENT_LIST_DIR}/libharu/include" )
+set ( ${PROJECT_NAME}_PC_CFLAGS "-I${hpdf_LOOKASIDE_DIR}/include" )
 set ( ${PROJECT_NAME}_PC_LIBS "-L${CMAKE_LIBRARY_OUTPUT_DIRECTORY} -lhpdf" )
 configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkg-config.in 
         ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )

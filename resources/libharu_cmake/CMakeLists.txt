@@ -16,7 +16,10 @@
 cmake_minimum_required ( VERSION 2.8.12 )
 project ( hpdf C )
 include ( ${CMAKE_CURRENT_LIST_DIR}/../macros.cmake )
-set ( ${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/../../libharu )
+
+if ( NOT DEFINED ${PROJECT_NAME}_LOOKASIDE_DIR )
+    set ( ${PROJECT_NAME}_LOOKASIDE_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../lookaside_libpng  CACHE INTERNAL "" )
+endif ( )
 
 # dependencies
 set ( ${PROJECT_NAME}_DEPS zlib libpng )
@@ -34,13 +37,13 @@ if ( STATICLIB_USE_DEPLIBS_CACHE )
 endif ( )
 
 # library
-file ( GLOB_RECURSE ${PROJECT_NAME}_SRC ${${PROJECT_NAME}_SOURCE_DIR}/src/*.c )
-file ( GLOB_RECURSE ${PROJECT_NAME}_HEADERS ${${PROJECT_NAME}_SOURCE_DIR}/include/*.hpp )
+file ( GLOB_RECURSE ${PROJECT_NAME}_SRC ${${PROJECT_NAME}_LOOKASIDE_DIR}/src/*.c )
+file ( GLOB_RECURSE ${PROJECT_NAME}_HEADERS ${${PROJECT_NAME}_LOOKASIDE_DIR}/include/*.hpp )
 add_library ( ${PROJECT_NAME} STATIC ${${PROJECT_NAME}_SRC} ${${PROJECT_NAME}_HEADERS} )
 source_group ( "src" FILES ${${PROJECT_NAME}_SRC} )
 source_group ( "include" FILES ${${PROJECT_NAME}_HEADERS} )
 target_include_directories ( ${PROJECT_NAME} BEFORE PRIVATE
-        ${${PROJECT_NAME}_SOURCE_DIR}/include
+        ${${PROJECT_NAME}_LOOKASIDE_DIR}/include
         ${${PROJECT_NAME}_DEPS_PC_INCLUDE_DIRS} )
 if ( ${CMAKE_CXX_COMPILER_ID}x MATCHES "MSVCx" )
     target_compile_options ( ${PROJECT_NAME} PRIVATE
